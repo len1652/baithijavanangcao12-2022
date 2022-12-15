@@ -60,4 +60,26 @@ public class anhchedao {
 		}
 		
 	}
+	public void giamlikeanh(long maanhche , int like) {
+		try {
+			//B1: Ket noi vao csdl QlSach
+			ketNoi kn = new ketNoi();
+			kn.Ketnoi();
+			//B2: lay du lieu ve
+			String sql ="UPDATE AnhChe SET  LuotLike= ? WHERE MaAnhChe=?";
+			PreparedStatement cmd = kn.cn.prepareStatement(sql);
+			
+			cmd.setInt(1,like);
+			cmd.setLong(2,maanhche);
+			
+			ResultSet rs = cmd.executeQuery();
+			//B3: Duyet rs de luu vao arraylist
+			
+			//b4: Dong cac doi tuong
+			rs.close();
+			kn.cn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
