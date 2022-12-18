@@ -14,19 +14,18 @@ import javax.servlet.http.HttpSession;
 import bean.anhchebean;
 import bean.khachhangbean;
 import bo.anhchebo;
-import dao.ktdndao;
 
 /**
- * Servlet implementation class loginController
+ * Servlet implementation class anhcanhandangController
  */
-@WebServlet("/loginController")
-public class loginController extends HttpServlet {
+@WebServlet("/anhcanhandangController")
+public class anhcanhandangController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginController() {
+    public anhcanhandangController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,30 +37,32 @@ public class loginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("utf-8");
 	    response.setCharacterEncoding("utf-8");
-	    String un = request.getParameter("txtun");
-		String pass= request.getParameter("txtpass");
-		String kt= request.getParameter("kt");
-		String dky = request.getParameter("butdk");
-		if (dky!=null) {
-			response.sendRedirect("dangkyController");
-			return;
-		}
-	    if(un!=null && pass!=null) {
-	    	ktdndao taikhoan = new ktdndao();
-	    	khachhangbean kh = taikhoan.ktdn(un, pass);
-	    	
-	    	if (kh !=null) {
-	    		session.setAttribute("taikhoan", kh);
-				response.sendRedirect("anhcheController");
-				return;
-	    	}
-	    }
-	    if (kt!=null) {
-	    	int ktranhap = Integer.parseInt(kt);
-	    	request.setAttribute("ktra", ktranhap);
-	    }
+	    String xoanh = request.getParameter("xoaanh");
+	    anhchebo anhbo = new anhchebo();
 	    
-	    RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+	    if(xoanh!=null) {
+	    	anhbo.xoaanhtrangchu(Integer.parseInt(xoanh));
+	    	response.sendRedirect("anhcanhandangController");
+			return;
+	    }
+	    ArrayList<anhchebean> ds = anhbo.getanhche();
+	    //dao
+	    ArrayList<anhchebean> ds2 =new ArrayList<anhchebean>();
+	    khachhangbean taikhoan =  (khachhangbean) session.getAttribute("taikhoan");
+	    if (taikhoan == null) {
+	    	response.sendRedirect("loginController");
+			return;
+	    }
+	    else {
+	    	for (int i = ds.size()-1; i>=0;i--) {
+	    		if (taikhoan.getMaKhachHang().equals(ds.get(i).getMaKhachHang())) {
+	    			ds2.add(ds.get(i));
+	    		}
+		    	
+		    }
+	    }
+	    request.setAttribute("dsanh", ds2);
+	    RequestDispatcher rd=request.getRequestDispatcher("anhcanhandang.jsp");
 		rd.forward(request, response);
 	}
 

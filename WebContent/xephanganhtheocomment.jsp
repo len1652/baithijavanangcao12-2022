@@ -16,54 +16,56 @@
       crossorigin="anonymous" />
     <title>Document</title></head>
 <body>
-<%@include file="headerAdmin.jsp" %>
+<%@include file="headerNguoiDung.jsp" %>
  <table class="table table-hover">
 
 	
 	
 	
 	  <div style="TEXT-ALIGN: center;">
-	     <h2 style="font-weight: 600; color: red;">Duyệt ảnh</h2>
+	     <h2 style="font-weight: 600; color: red;">Bảng xếp hạng ảnh được like nhiều nhất</h2>
 	  </div>
 	    
-	
+		<tr>
+		<form  action="xephanganhController">
+			<button >bảng xếp hạng lượt like nhiều nhất</button>
+		 </form>
+		</tr>
       <tr>
-      	<th>STT</th>
-      	<th>Mã ảnh</th>
+      	<th>Xếp hạng ảnh</th>
+      	
       	<th>Tiêu đề</th>
       	<th>Lượt like</th>
       	<th>Lượt comment</th>
       	<th>Ảnh</th>
-      	<th>Mã khách hàng</th>
+      	<th>Người đăng</th>
       	<th>Ghi chú</th>
       </tr>
 	<c:if test="${dsanh != null }">
 		<c:set var = "count" value = "1"/>
 		<c:forEach var="h" items="${dsanh}" >
+			
+			
+			
 			<tr>
 			  <td> ${count}</td>	
 			  <c:set var = "count" value = '${count+1}'/>
 			  
-			  <td> ${h.getMaAnhChe()}</td>
+			 
 			  <td> ${h.getTieuDe()}</td>
 			  <td> ${h.getLuotLike()}</td>
 			  <td> ${h.getLuotComment()}</td>
 			  <td> <img alt="" src="${h.getAnh()}" style="width: 200px"></td>
 			  <td> ${h.getMaKhachHang()}</td>
 			  <td> ${h.getGhiChu()}</td>
-			  
-		  	  <td>
-			  	  <form id='${h.getMaAnhChe()}+"form"' action="chitietanhadminController">
-			  	  	<button type="submit" name="chitiet" value='${h.getMaAnhChe()}' form='${h.getMaAnhChe()}+"form"'>Chi tiết ảnh</button>
+			  <td>
+			  	  <form id='${h.getMaAnhChe()}+"form"' action="commentController">
+			  	  	<button type="submit" name="idanh" value='${h.getMaAnhChe()}' form='${h.getMaAnhChe()}+"form"'>Xem chi tiết ảnh</button>
 			  	  </form>
-		  	  <td>
+		  	  </td>
 		  	  
-		  	  <td>
-			  	  <form id='${h.getMaAnhChe()}+"form"' action="quanlyanhController">
-			  	  	<button type="submit" name="xoa" value='${h.getMaAnhChe()}' form='${h.getMaAnhChe()}+"form"'>Xoá</button>
-			  	  </form>
-		  	  <td>
 		   	</tr>
+		 
 		</c:forEach>
 	</c:if>
 	</table>

@@ -20,6 +20,9 @@
       <div class="container">
         <a class="navbar-brand" href="anhcheController">Phuc Blogs</a>
         <a class="navbar-brand" href="cheanhController">Đăng ảnh</a>
+        <a class="navbar-brand" href="xephanganhController">Bảng xếp hạng ảnh</a>
+        <a class="navbar-brand" href="thongtincanhanController">Thông tin cá nhân</a>
+        <a class="navbar-brand" href="anhcanhandangController">Ảnh cá nhân đã đăng</a>
         <div class="d-flex justify-content-end">
           <a class="navbar-brand" href="loginController">Login</a>
         </div>

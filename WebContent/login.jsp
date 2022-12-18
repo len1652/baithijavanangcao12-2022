@@ -35,15 +35,17 @@
               
 			                <input  class="form-control"  name="txtun" type="text" value=""  placeholder="Tài khoản"> <br>
 			                
-							<input  class="form-control"  name="txtpass" type="text" value=""  placeholder="Mật khẩu"> <br>
+							<input  class="form-control"  name="txtpass" type="password" value=""  placeholder="Mật khẩu"> <br>
 							<c:if test = "${ktra ==1}">
 						         	<h4 style="color: red;"> tài khoản hoặc mật khẩu sai</h4>
 						    </c:if>
 							
+							  
 				  			<input class="btn btn-primary"  name="butdn" type="submit" value="Đăng nhập">  
-				  			
+				  			<input class="btn btn-outline-primary" name="butdk" type="submit" value="Đăng ký">
                        			                       
 					</form>
+					
           
         </div>
       </div>

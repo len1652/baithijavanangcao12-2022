@@ -20,6 +20,7 @@
       <div class="container">
         <a class="navbar-brand" href="duyetanhController">Duyệt ảnh</a>
         <a class="navbar-brand" href="quanlyanhController">Quản lý ảnh đã đăng</a>
+        <a class="navbar-brand" href="quanlytaikhoanController">Quản lý tài khoản</a>
         <div class="d-flex justify-content-end">
           <a class="navbar-brand" href="loginadminController">Login</a>
         </div>

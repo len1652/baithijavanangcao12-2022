@@ -17,15 +17,7 @@
     <title>Document</title>
 </head>
 <body>
-	<div class="sidenav">
-      <div class="login-main-text">
-        <h2>
-          Phuc Blogs<br />
-          Login Page
-        </h2>
-        <p>Login or register from here to access.</p>
-      </div>
-    </div>
+	 <h2 style="font-weight: 600; color: red;">Trang đăng nhập của admin</h2>
     <div class="main">
       <div class="col-md-6 col-sm-12">
         <div class="login-form">
@@ -35,7 +27,7 @@
               
 			                <input  class="form-control"  name="txtun" type="text" value=""  placeholder="Tài khoản"> <br>
 			                
-							<input  class="form-control"  name="txtpass" type="text" value=""  placeholder="Mật khẩu"> <br>
+							<input  class="form-control"  name="txtpass" type="password" value=""  placeholder="Mật khẩu"> <br>
 							<c:if test = "${ktra ==1}">
 						         	<h4 style="color: red;"> tài khoản hoặc mật khẩu sai</h4>
 						    </c:if>

@@ -1,7 +1,6 @@
 package Controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,22 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.anhchebean;
-import bean.khachhangbean;
-import bo.anhchebo;
-import dao.ktdndao;
+import bo.taikhoanbo;
 
 /**
- * Servlet implementation class loginController
+ * Servlet implementation class dangkyController
  */
-@WebServlet("/loginController")
-public class loginController extends HttpServlet {
+@WebServlet("/dangkyController")
+public class dangkyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginController() {
+    public dangkyController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,30 +34,34 @@ public class loginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("utf-8");
 	    response.setCharacterEncoding("utf-8");
-	    String un = request.getParameter("txtun");
-		String pass= request.getParameter("txtpass");
-		String kt= request.getParameter("kt");
-		String dky = request.getParameter("butdk");
-		if (dky!=null) {
-			response.sendRedirect("dangkyController");
-			return;
-		}
-	    if(un!=null && pass!=null) {
-	    	ktdndao taikhoan = new ktdndao();
-	    	khachhangbean kh = taikhoan.ktdn(un, pass);
-	    	
-	    	if (kh !=null) {
-	    		session.setAttribute("taikhoan", kh);
-				response.sendRedirect("anhcheController");
-				return;
-	    	}
-	    }
-	    if (kt!=null) {
-	    	int ktranhap = Integer.parseInt(kt);
-	    	request.setAttribute("ktra", ktranhap);
+	    String matk = request.getParameter("txttendangnhap");
+	    String matkhau = request.getParameter("txtmatkhau");
+	    String tennguoidung = request.getParameter("txttennguoidung");
+	    String email = request.getParameter("txtemail");
+	    String sdt = request.getParameter("txtsodienthoai");
+	    System.out.println(email);
+	    taikhoanbo tkbo = new taikhoanbo();
+	    if (matk!=null) {
+	    	if (matk.length()!=0 && matkhau.length()!=0 && tennguoidung.length()!=0 && email.length()!=0 && sdt.length()!=0) {
+		    	if (tkbo.kiemtratktontai(matk)==1) {
+			    	// tài khoản đã tồn tại
+			    	request.setAttribute("TB", 1);
+			   
+			    }
+			    else {
+			    	// tạo tài khoản thành công
+			    	tkbo.taotaikhoan(matk,tennguoidung, matkhau, email, sdt);
+			    	response.sendRedirect("loginController");
+					return;
+			    }
+		    }
+		    else {
+		    	// chưa điền đủ thông tin
+		    	request.setAttribute("TB", 2);
+		    }
 	    }
 	    
-	    RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+	    RequestDispatcher rd=request.getRequestDispatcher("dangky.jsp");
 		rd.forward(request, response);
 	}
 

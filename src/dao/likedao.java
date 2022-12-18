@@ -136,4 +136,27 @@ public class likedao {
 			e.printStackTrace();
 		}
 	}
+	public void xoaliketheoidtk(String idtk ) {
+			
+			try {
+				//B1: Ket noi vao csdl QlSach
+				ketNoi kn = new ketNoi();
+				kn.Ketnoi();
+				//B2: lay du lieu ve
+				String sql ="DELETE FROM LikeAnh WHERE MaKhachHang=? ";
+				PreparedStatement cmd = kn.cn.prepareStatement(sql);
+				
+				cmd.setString(1,idtk);
+				
+				
+				ResultSet rs = cmd.executeQuery();
+				//B3: Duyet rs de luu vao arraylist
+				
+				//b4: Dong cac doi tuong
+				rs.close();
+				kn.cn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 }

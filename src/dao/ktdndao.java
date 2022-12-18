@@ -24,8 +24,10 @@ public class ktdndao {
 				String MaKhachHang = rs.getString("MaKhachHang");
 				String TenKhachHang=rs.getString("TenKhachHang");
 				String Pass = rs.getString("Pass");
+				String Email = rs.getString("Email");
+				String Sdt = rs.getString("Sdt");
 				
-				kh = new khachhangbean(MaKhachHang, TenKhachHang, Pass);
+				kh = new khachhangbean(MaKhachHang, TenKhachHang, Pass, Email, Sdt);
 			}
 			//B4: Dong cac doi tuong
 			rs.close(); kn.cn.close();

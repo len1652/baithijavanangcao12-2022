@@ -38,6 +38,14 @@ public class anhcheController extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("utf-8");
 	    response.setCharacterEncoding("utf-8");
+	    String page = request.getParameter("page");
+	    int trang = 0;
+	    int pagehientai =0;
+	    if (page!=null) {
+	    	pagehientai=Integer.parseInt(page);
+	    }
+	    		
+	    		
 	    anhchebo anhbo = new anhchebo();
 	    
 	    ArrayList<anhchebean> ds = anhbo.getanhche();
@@ -49,6 +57,7 @@ public class anhcheController extends HttpServlet {
 	    for (int i = ds.size()-1; i>=0;i--) {
 	    	ds2.add(ds.get(i));
 	    }
+	    
 	    khachhangbean taikhoan =  (khachhangbean) session.getAttribute("taikhoan");
 	    if (taikhoan == null) {
 	    }
@@ -61,8 +70,23 @@ public class anhcheController extends HttpServlet {
 	    	}
 	    	request.setAttribute("dsanhdalike", dsmaanhchedalike);
 	    }
-	    request.setAttribute("dsanh", ds2);
-	    
+	    ArrayList<anhchebean> dsanhpage =new ArrayList<anhchebean>();
+	    int i = pagehientai*5;
+	    for(; i<pagehientai*5+5;i++) {
+	    	if (i!=ds2.size()) {
+	    		dsanhpage.add(ds2.get(i));
+	    	}
+	    	else {
+	    		break;
+	    	}
+	    	
+	    }
+	    request.setAttribute("dsanh", dsanhpage);
+	    ArrayList<Integer> sotrang = new ArrayList<Integer>();
+	    for(int j =0; j<(ds2.size()/5)+1;j++) {
+	    	sotrang.add(j);
+	    }
+	    request.setAttribute("sotrang", sotrang);
 	    RequestDispatcher rd=request.getRequestDispatcher("anhhai.jsp");
 		rd.forward(request, response);
 	}

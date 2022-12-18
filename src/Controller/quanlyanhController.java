@@ -38,6 +38,7 @@ public class quanlyanhController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 	    response.setCharacterEncoding("utf-8");
 	    String xoaanh = request.getParameter("xoa");
+	    String chitietanh = request.getParameter("chitiet");
 	    
 		dangnhapbean taikhoan =  (dangnhapbean) session.getAttribute("taikhoanadmin");
 	    if (taikhoan == null) {
